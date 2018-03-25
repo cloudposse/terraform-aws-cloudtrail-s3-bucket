@@ -5,7 +5,7 @@ Terraform module to provision an S3 bucket with built in policy to allow [CloudT
 This is useful if an organization uses a number of separate AWS accounts to isolate the Audit environment from other environments (production, staging, development).
 
 In this case, you create CloudTrail in the production environment (production AWS account), 
-whereas the S3 bucket to store the CloudTrail logs is created in the Audit AWS account, restricting access to the logs only to the users/groups from the Audit account.
+while the S3 bucket to store the CloudTrail logs is created in the Audit AWS account, restricting access to the logs only to the users/groups from the Audit account.
 
 
 The module supports the following:
