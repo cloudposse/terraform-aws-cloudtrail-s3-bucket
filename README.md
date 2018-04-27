@@ -4,7 +4,7 @@ Terraform module to provision an S3 bucket with built in policy to allow [CloudT
 
 This is useful if an organization uses a number of separate AWS accounts to isolate the Audit environment from other environments (production, staging, development).
 
-In this case, you create CloudTrail in the production environment (production AWS account), 
+In this case, you create CloudTrail in the production environment (Production AWS account),
 while the S3 bucket to store the CloudTrail logs is created in the Audit AWS account, restricting access to the logs only to the users/groups from the Audit account.
 
 
@@ -39,6 +39,7 @@ module "s3_bucket" {
 | `tags`            | `{}`                 | Additional tags  (e.g. `map("BusinessUnit","XYZ")`                            | No       |
 | `delimiter`       | `-`                  | Delimiter to be used between `namespace`, `stage`, `name` and `attributes`    | No       |
 | `acl`             | `log-delivery-write` | Canned ACL to apply to the S3 bucket                                          | No       |
+| `force_destroy`   | `false`              | A boolean that indicates the bucket can be destroyed even if it contains objects. These objects are not recoverable   | No       |
 
 
 ## Outputs

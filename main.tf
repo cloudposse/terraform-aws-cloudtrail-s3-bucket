@@ -61,7 +61,7 @@ module "s3_bucket" {
   region                 = "${var.region}"
   acl                    = "${var.acl}"
   policy                 = "${data.aws_iam_policy_document.default.json}"
-  force_destroy          = "false"
+  force_destroy          = "${var.force_destroy}"
   versioning_enabled     = "true"
   lifecycle_rule_enabled = "false"
   delimiter              = "${var.delimiter}"

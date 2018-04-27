@@ -28,7 +28,7 @@ variable "attributes" {
 variable "tags" {
   type        = "map"
   default     = {}
-  description = "Additional tags (e.g. map('BusinessUnit`,`XYZ`)"
+  description = "Additional tags (e.g. map(`BusinessUnit`,`XYZ`)"
 }
 
 variable "acl" {
@@ -41,4 +41,9 @@ variable "region" {
   type        = "string"
   default     = "us-east-1"
   description = "AWS Region for S3 bucket"
+}
+
+variable "force_destroy" {
+  description = "A boolean that indicates the bucket can be destroyed even if it contains objects. These objects are not recoverable"
+  default     = "false"
 }
