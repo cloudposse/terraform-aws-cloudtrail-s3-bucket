@@ -1,0 +1,80 @@
+---
+#
+# This is the canonical configuration for the `README.md`
+# Run `make readme` to rebuild the `README.md`
+#
+
+# Name of this project
+name: terraform-aws-cloudtrail-s3-bucket
+
+# Logo for this project
+#logo: docs/logo.png
+
+# License of this project
+license: "APACHE2"
+
+# Canonical GitHub repo
+github_repo: cloudposse/terraform-aws-cloudtrail-s3-bucket
+
+# Badges to display
+badges:
+  - name: "Build Status"
+    image: "https://travis-ci.org/cloudposse/terraform-aws-cloudtrail-s3-bucket.svg?branch=master"
+    url: "https://travis-ci.org/cloudposse/terraform-aws-cloudtrail-s3-bucket"
+  - name: "Latest Release"
+    image: "https://img.shields.io/github/release/cloudposse/terraform-aws-cloudtrail-s3-bucket.svg"
+    url: "https://github.com/cloudposse/terraform-aws-cloudtrail-s3-bucket/releases/latest"
+  - name: "Slack Community"
+    image: "https://slack.cloudposse.com/badge.svg"
+    url: "https://slack.cloudposse.com"
+
+related:
+  - name: "terraform-aws-cloudfront-s3-cdn"
+    description: "Terraform module to easily provision CloudFront CDN backed by an S3 origin"
+    url: "https://github.com/cloudposse/terraform-aws-cloudfront-s3-cdn"
+  - name: "terraform-aws-s3-log-storage"
+    description: "This module creates an S3 bucket suitable for receiving logs from other AWS services such as S3, CloudFront, and CloudTrail"
+    url: "https://github.com/cloudposse/terraform-aws-s3-log-storage"
+  - name: "terraform-aws-s3-website"
+    description: "Terraform Module for Creating S3 backed Websites and Route53 DNS"
+    url: "https://github.com/cloudposse/terraform-aws-s3-website"
+  - name: "terraform-aws-cloudtrail"
+    description: "Terraform module to provision an AWS CloudTrail and an encrypted S3 bucket with versioning to store CloudTrail logs"
+    url: "https://github.com/cloudposse/terraform-aws-cloudtrail"
+
+# Short description of this project
+description: |-
+  Terraform module to provision an S3 bucket with built in policy to allow [CloudTrail](https://aws.amazon.com/cloudtrail/) [logs](https://docs.aws.amazon.com/awscloudtrail/latest/userguide/logging-management-and-data-events-with-cloudtrail.html).
+
+  This is useful if an organization uses a number of separate AWS accounts to isolate the Audit environment from other environments (production, staging, development).
+
+  In this case, you create CloudTrail in the production environment (Production AWS account),
+  while the S3 bucket to store the CloudTrail logs is created in the Audit AWS account, restricting access to the logs only to the users/groups from the Audit account.
+
+
+  The module supports the following:
+
+  1. Forced [server-side encryption](https://docs.aws.amazon.com/AmazonS3/latest/dev/UsingServerSideEncryption.html) at rest for the S3 bucket
+  2. S3 bucket [versioning](https://docs.aws.amazon.com/AmazonS3/latest/dev/Versioning.html) to easily recover from both unintended user actions and application failures
+  3. S3 bucket is protected from deletion if it's not empty ([force_destroy](https://www.terraform.io/docs/providers/aws/r/s3_bucket.html#force_destroy) set to `false`)
+
+# How to use this project
+usage: |-
+  ```hcl
+  module "s3_bucket" {
+    source    = "git::https://github.com/cloudposse/terraform-aws-cloudtrail-s3-bucket.git?ref=master"
+    namespace = "cp"
+    stage     = "prod"
+    name      = "cluster"
+    region    = "us-east-1"
+  }
+  ```
+
+include:
+  - "docs/targets.md"
+  - "docs/terraform.md"
+
+# Contributors to this project
+contributors:
+  - name: "Andriy Knysh"
+    github: "aknysh"
