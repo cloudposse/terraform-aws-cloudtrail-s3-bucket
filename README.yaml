@@ -29,18 +29,18 @@ badges:
     url: "https://slack.cloudposse.com"
 
 related:
-  - name: "terraform-aws-cloudfront-s3-cdn"
-    description: "Terraform module to easily provision CloudFront CDN backed by an S3 origin"
-    url: "https://github.com/cloudposse/terraform-aws-cloudfront-s3-cdn"
-  - name: "terraform-aws-s3-log-storage"
-    description: "This module creates an S3 bucket suitable for receiving logs from other AWS services such as S3, CloudFront, and CloudTrail"
-    url: "https://github.com/cloudposse/terraform-aws-s3-log-storage"
-  - name: "terraform-aws-s3-website"
-    description: "Terraform Module for Creating S3 backed Websites and Route53 DNS"
-    url: "https://github.com/cloudposse/terraform-aws-s3-website"
   - name: "terraform-aws-cloudtrail"
     description: "Terraform module to provision an AWS CloudTrail and an encrypted S3 bucket with versioning to store CloudTrail logs"
     url: "https://github.com/cloudposse/terraform-aws-cloudtrail"
+  - name: "terraform-aws-cloudtrail-cloudwatch-alarms"
+    description: "Terraform module for creating alarms for tracking important changes and occurances from cloudtrail."
+    url: "https://github.com/cloudposse/terraform-aws-cloudtrail-cloudwatch-alarms"
+  - name: "terraform-aws-s3-log-storage"
+    description: "This module creates an S3 bucket suitable for receiving logs from other AWS services such as S3, CloudFront, and CloudTrail"
+    url: "https://github.com/cloudposse/terraform-aws-s3-log-storage"
+  - name: "terraform-aws-cloudtrail-s3-bucket"
+    description: "S3 bucket with built in IAM policy to allow CloudTrail logs"
+    url: "https://github.com/cloudposse/terraform-aws-cloudtrail-s3-bucket"
 
 # Short description of this project
 description: |-
