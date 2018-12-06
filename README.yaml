@@ -7,6 +7,24 @@
 # Name of this project
 name: terraform-aws-cloudtrail-s3-bucket
 
+# Tags of this project
+tags:
+  - aws
+  - terraform
+  - terraform-modules
+  - security
+  - cloudtrail
+  - audit-logs
+  - audit
+  - s3
+  - bucket
+  - iam
+  - iam-policy
+
+# Categories of this project
+categories:
+  - terraform-modules/security
+
 # Logo for this project
 #logo: docs/logo.png
 
