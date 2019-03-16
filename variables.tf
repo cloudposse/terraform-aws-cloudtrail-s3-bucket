@@ -47,3 +47,58 @@ variable "force_destroy" {
   description = "A boolean that indicates the bucket can be destroyed even if it contains objects. These objects are not recoverable"
   default     = "false"
 }
+
+variable "versioning_enabled" {
+  description = "A state of versioning. Versioning is a means of keeping multiple variants of an object in the same bucket."
+  default     = "true"
+}
+
+variable "lifecycle_rule_enabled" {
+  description = "Enable lifecycle events on this bucket"
+  default     = "true"
+}
+
+variable "lifecycle_prefix" {
+  description = "Prefix filter. Used to manage object lifecycle events."
+  default     = ""
+}
+
+variable "lifecycle_tags" {
+  description = "Tags filter. Used to manage object lifecycle events."
+  default     = {}
+}
+
+variable "noncurrent_version_expiration_days" {
+  description = "Specifies when noncurrent object versions expire."
+  default     = "90"
+}
+
+variable "noncurrent_version_transition_days" {
+  description = "Specifies when noncurrent object versions transitions"
+  default     = "30"
+}
+
+variable "standard_transition_days" {
+  description = "Number of days to persist in the standard storage tier before moving to the infrequent access tier"
+  default     = "30"
+}
+
+variable "glacier_transition_days" {
+  description = "Number of days after which to move the data to the glacier storage tier"
+  default     = "60"
+}
+
+variable "expiration_days" {
+  description = "Number of days after which to expunge the objects"
+  default     = "90"
+}
+
+variable "sse_algorithm" {
+  description = "The server-side encryption algorithm to use. Valid values are AES256 and aws:kms"
+  default     = "AES256"
+}
+
+variable "kms_master_key_id" {
+  description = "The AWS KMS master key ID used for the SSE-KMS encryption. This can only be used when you set the value of sse_algorithm as aws:kms. The default aws/s3 AWS KMS master key is used if this element is absent while the sse_algorithm is aws:kms"
+  default     = ""
+}
