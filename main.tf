@@ -31,7 +31,7 @@ data "aws_iam_policy_document" "default" {
 
     principals {
       type        = "Service"
-      identifiers = ["config.amazonaws.com","cloudtrail.amazonaws.com"]
+      identifiers = ["config.amazonaws.com", "cloudtrail.amazonaws.com"]
     }
 
     actions = [
@@ -54,17 +54,26 @@ data "aws_iam_policy_document" "default" {
 }
 
 module "s3_bucket" {
-  source                 = "git::https://github.com/cloudposse/terraform-aws-s3-log-storage.git?ref=tags/0.2.0"
-  namespace              = "${var.namespace}"
-  stage                  = "${var.stage}"
-  name                   = "${var.name}"
-  region                 = "${var.region}"
-  acl                    = "${var.acl}"
-  policy                 = "${data.aws_iam_policy_document.default.json}"
-  force_destroy          = "${var.force_destroy}"
-  versioning_enabled     = "true"
-  lifecycle_rule_enabled = "false"
-  delimiter              = "${var.delimiter}"
-  attributes             = "${var.attributes}"
-  tags                   = "${var.tags}"
+  source                             = "git::https://github.com/cloudposse/terraform-aws-s3-log-storage.git?ref=tags/0.4.0"
+  namespace                          = "${var.namespace}"
+  stage                              = "${var.stage}"
+  name                               = "${var.name}"
+  region                             = "${var.region}"
+  acl                                = "${var.acl}"
+  policy                             = "${data.aws_iam_policy_document.default.json}"
+  force_destroy                      = "${var.force_destroy}"
+  versioning_enabled                 = "${var.versioning_enabled}"
+  lifecycle_rule_enabled             = "${var.lifecycle_rule_enabled}"
+  lifecycle_prefix                   = "${var.lifecycle_prefix}"
+  lifecycle_tags                     = "${var.lifecycle_tags}"
+  noncurrent_version_expiration_days = "${var.noncurrent_version_expiration_days}"
+  noncurrent_version_transition_days = "${var.noncurrent_version_transition_days}"
+  standard_transition_days           = "${var.standard_transition_days}"
+  glacier_transition_days            = "${var.glacier_transition_days}"
+  expiration_days                    = "${var.expiration_days}"
+  sse_algorithm                      = "${var.sse_algorithm}"
+  kms_master_key_id                  = "${var.kms_master_key_id}"
+  delimiter                          = "${var.delimiter}"
+  attributes                         = "${var.attributes}"
+  tags                               = "${var.tags}"
 }
