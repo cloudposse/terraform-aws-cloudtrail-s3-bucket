@@ -49,7 +49,7 @@ variable "force_destroy" {
 }
 
 variable "versioning_enabled" {
-  description = "A state of versioning. Versioning is a means of keeping multiple variants of an object in the same bucket."
+  description = "A state of versioning. Versioning is a means of keeping multiple variants of an object in the same bucket"
   default     = "true"
 }
 
@@ -59,22 +59,22 @@ variable "lifecycle_rule_enabled" {
 }
 
 variable "lifecycle_prefix" {
-  description = "Prefix filter. Used to manage object lifecycle events."
+  description = "Prefix filter. Used to manage object lifecycle events"
   default     = ""
 }
 
 variable "lifecycle_tags" {
-  description = "Tags filter. Used to manage object lifecycle events."
+  description = "Tags filter. Used to manage object lifecycle events"
   default     = {}
 }
 
 variable "noncurrent_version_expiration_days" {
-  description = "Specifies when noncurrent object versions expire."
+  description = "Specifies when noncurrent object versions expire"
   default     = "90"
 }
 
 variable "noncurrent_version_transition_days" {
-  description = "Specifies when noncurrent object versions transitions"
+  description = "Specifies when noncurrent object versions transition"
   default     = "30"
 }
 
