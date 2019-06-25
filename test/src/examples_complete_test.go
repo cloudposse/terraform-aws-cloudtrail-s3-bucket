@@ -28,7 +28,7 @@ func TestExamplesComplete(t *testing.T) {
 	// Run `terraform output` to get the value of an output variable
 	s3BucketId := terraform.Output(t, terraformOptions, "bucket_id")
 
-	expectedS3BucketId := "cloudtrail-s3-bucket"
+	expectedS3BucketId := "eg-test-cloudtrail-s3-bucket"
 	// Verify we're getting back the outputs we expect
 	assert.Equal(t, expectedS3BucketId, s3BucketId)
 }
