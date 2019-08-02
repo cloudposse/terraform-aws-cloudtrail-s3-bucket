@@ -76,7 +76,7 @@ module "s3_bucket" {
   glacier_transition_days            = var.glacier_transition_days
   expiration_days                    = var.expiration_days
   sse_algorithm                      = var.sse_algorithm
-  kms_master_key_id                  = var.kms_master_key_id
+  kms_master_key_id                  = var.kms_master_key_arn
   delimiter                          = var.delimiter
   attributes                         = var.attributes
   tags                               = var.tags
