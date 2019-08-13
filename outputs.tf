@@ -17,3 +17,7 @@ output "prefix" {
   value       = "${module.s3_bucket.prefix}"
   description = "Prefix configured for lifecycle rules"
 }
+
+output "logging" {
+  value       = "${module.s3_bucket.logging}"
+}
