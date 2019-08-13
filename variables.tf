@@ -1,3 +1,8 @@
+variable "enabled" {
+  description = "Set to `false` to prevent the module from creating any resources"
+  default     = "true"
+}
+
 variable "namespace" {
   description = "Namespace (e.g. `cp` or `cloudposse`)"
   type        = "string"
