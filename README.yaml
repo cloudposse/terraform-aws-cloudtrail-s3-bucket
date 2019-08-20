@@ -46,6 +46,8 @@ related:
 description: |-
   Terraform module to provision an S3 bucket with built in policy to allow [CloudTrail](https://aws.amazon.com/cloudtrail/) [logs](https://docs.aws.amazon.com/awscloudtrail/latest/userguide/logging-management-and-data-events-with-cloudtrail.html).
 
+  In addtion to the main S3 bucket the module creates S3 Bucket for access logs for the first one.
+
   This is useful if an organization uses a number of separate AWS accounts to isolate the Audit environment from other environments (production, staging, development).
 
   In this case, you create CloudTrail in the production environment (Production AWS account),

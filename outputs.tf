@@ -13,6 +13,16 @@ output "bucket_arn" {
   description = "Bucket ARN"
 }
 
+output "access_logs_bucket_id" {
+  value       = "${module.access_logs_bucket.bucket_id}"
+  description = "Access logs bucket name (aka ID)"
+}
+
+output "access_logs_bucket_arn" {
+  value       = "${module.access_logs_bucket.bucket_arn}"
+  description = "Access logs bucket ARN"
+}
+
 output "prefix" {
   value       = "${var.lifecycle_prefix}"
   description = "Prefix configured for lifecycle rules"

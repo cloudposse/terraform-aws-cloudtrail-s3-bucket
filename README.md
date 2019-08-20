@@ -8,6 +8,8 @@
 
 Terraform module to provision an S3 bucket with built in policy to allow [CloudTrail](https://aws.amazon.com/cloudtrail/) [logs](https://docs.aws.amazon.com/awscloudtrail/latest/userguide/logging-management-and-data-events-with-cloudtrail.html).
 
+In addtion to the main S3 bucket the module creates S3 Bucket for access logs for the first one.
+
 This is useful if an organization uses a number of separate AWS accounts to isolate the Audit environment from other environments (production, staging, development).
 
 In this case, you create CloudTrail in the production environment (Production AWS account),
@@ -88,6 +90,19 @@ Available targets:
 
 | Name | Description | Type | Default | Required |
 |------|-------------|:----:|:-----:|:-----:|
+| access_logs_acl | Canned ACL to apply to the logs S3 bucket | string | `private` | no |
+| access_logs_expiration_days | Number of days after which to expunge the objects for access logs s3 bucket | string | `90` | no |
+| access_logs_force_destroy | A boolean that indicates the logs bucket can be destroyed even if it contains objects. These objects are not recoverable | string | `false` | no |
+| access_logs_glacier_transition_days | Number of days after which to move the data to the glacier storage tier for access logs s3 bucket | string | `60` | no |
+| access_logs_kms_master_key_arn | The AWS KMS master key ARN used for the SSE-KMS encryption. This can only be used when you set the value of sse_algorithm as aws:kms. The default aws/s3 AWS KMS master key is used if this element is absent while the sse_algorithm is aws:kms for access logs s3 bucket | string | `` | no |
+| access_logs_lifecycle_prefix | Prefix filter for access logs s3 bucket. Used to manage object lifecycle events | string | `` | no |
+| access_logs_lifecycle_rule_enabled | Enable lifecycle events on this logs bucket | string | `true` | no |
+| access_logs_lifecycle_tags | Tags filter for access logs s3 bucket. Used to manage object lifecycle events | map | `<map>` | no |
+| access_logs_noncurrent_version_expiration_days | Specifies when noncurrent object versions expire for access logs s3 bucket | string | `90` | no |
+| access_logs_noncurrent_version_transition_days | Specifies when noncurrent object versions transition for access logs s3 bucket | string | `30` | no |
+| access_logs_sse_algorithm | The server-side encryption algorithm to use. Valid values are AES256 and aws:kms for access logs s3 bucket | string | `AES256` | no |
+| access_logs_standard_transition_days | Number of days to persist in the standard storage tier before moving to the infrequent access tier for access logs s3 bucket | string | `30` | no |
+| access_logs_versioning_enabled | A state of versioning logs bucket. Versioning is a means of keeping multiple variants of an object in the same bucket | string | `true` | no |
 | acl | Canned ACL to apply to the S3 bucket | string | `log-delivery-write` | no |
 | attributes | Additional attributes (e.g. `logs`) | list | `<list>` | no |
 | delimiter | Delimiter to be used between `namespace`, `stage`, `name` and `attributes` | string | `-` | no |
@@ -99,19 +114,6 @@ Available targets:
 | lifecycle_prefix | Prefix filter. Used to manage object lifecycle events | string | `` | no |
 | lifecycle_rule_enabled | Enable lifecycle events on this bucket | string | `true` | no |
 | lifecycle_tags | Tags filter. Used to manage object lifecycle events | map | `<map>` | no |
-| logs_acl | Canned ACL to apply to the logs S3 bucket | string | `private` | no |
-| logs_expiration_days | Number of days after which to expunge the objects for logs s3 bucket | string | `90` | no |
-| logs_force_destroy | A boolean that indicates the logs bucket can be destroyed even if it contains objects. These objects are not recoverable | string | `false` | no |
-| logs_glacier_transition_days | Number of days after which to move the data to the glacier storage tier for logs s3 bucket | string | `60` | no |
-| logs_kms_master_key_arn | The AWS KMS master key ARN used for the SSE-KMS encryption. This can only be used when you set the value of sse_algorithm as aws:kms. The default aws/s3 AWS KMS master key is used if this element is absent while the sse_algorithm is aws:kms for logs s3 bucket | string | `` | no |
-| logs_lifecycle_prefix | Prefix filter for logs s3 bucket. Used to manage object lifecycle events | string | `` | no |
-| logs_lifecycle_rule_enabled | Enable lifecycle events on this logs bucket | string | `true` | no |
-| logs_lifecycle_tags | Tags filter for logs s3 bucket. Used to manage object lifecycle events | map | `<map>` | no |
-| logs_noncurrent_version_expiration_days | Specifies when noncurrent object versions expire for logs s3 bucket | string | `90` | no |
-| logs_noncurrent_version_transition_days | Specifies when noncurrent object versions transition for logs s3 bucket | string | `30` | no |
-| logs_sse_algorithm | The server-side encryption algorithm to use. Valid values are AES256 and aws:kms for logs s3 bucket | string | `AES256` | no |
-| logs_standard_transition_days | Number of days to persist in the standard storage tier before moving to the infrequent access tier for logs s3 bucket | string | `30` | no |
-| logs_versioning_enabled | A state of versioning logs bucket. Versioning is a means of keeping multiple variants of an object in the same bucket | string | `true` | no |
 | name | Name  (e.g. `app` or `cluster`) | string | - | yes |
 | namespace | Namespace (e.g. `cp` or `cloudposse`) | string | - | yes |
 | noncurrent_version_expiration_days | Specifies when noncurrent object versions expire | string | `90` | no |
@@ -127,6 +129,8 @@ Available targets:
 
 | Name | Description |
 |------|-------------|
+| access_logs_bucket_arn | Access logs bucket ARN |
+| access_logs_bucket_id | Access logs bucket name (aka ID) |
 | bucket_arn | Bucket ARN |
 | bucket_domain_name | FQDN of bucket |
 | bucket_id | Bucket Name (aka ID) |

@@ -23,25 +23,25 @@ module "access_logs_bucket" {
 
   region = "${var.region}"
 
-  acl = "${var.logs_acl}"
+  acl = "${var.access_logs_acl}"
 
-  force_destroy = "${var.logs_force_destroy}"
+  force_destroy = "${var.access_logs_force_destroy}"
 
-  versioning_enabled = "${var.logs_versioning_enabled}"
+  versioning_enabled = "${var.access_logs_versioning_enabled}"
 
-  lifecycle_rule_enabled = "${var.logs_lifecycle_rule_enabled}"
-  lifecycle_prefix       = "${var.logs_lifecycle_prefix}"
-  lifecycle_tags         = "${var.logs_lifecycle_tags}"
+  lifecycle_rule_enabled = "${var.access_logs_lifecycle_rule_enabled}"
+  lifecycle_prefix       = "${var.access_logs_lifecycle_prefix}"
+  lifecycle_tags         = "${var.access_logs_lifecycle_tags}"
 
-  noncurrent_version_expiration_days = "${var.logs_noncurrent_version_expiration_days}"
-  noncurrent_version_transition_days = "${var.logs_noncurrent_version_transition_days}"
+  noncurrent_version_expiration_days = "${var.access_logs_noncurrent_version_expiration_days}"
+  noncurrent_version_transition_days = "${var.access_logs_noncurrent_version_transition_days}"
 
-  standard_transition_days = "${var.logs_standard_transition_days}"
-  glacier_transition_days  = "${var.logs_glacier_transition_days}"
-  expiration_days          = "${var.logs_expiration_days}"
+  standard_transition_days = "${var.access_logs_standard_transition_days}"
+  glacier_transition_days  = "${var.access_logs_glacier_transition_days}"
+  expiration_days          = "${var.access_logs_expiration_days}"
 
-  sse_algorithm      = "${var.logs_sse_algorithm}"
-  kms_master_key_arn = "${var.logs_kms_master_key_arn}"
+  sse_algorithm      = "${var.access_logs_sse_algorithm}"
+  kms_master_key_arn = "${var.access_logs_kms_master_key_arn}"
 }
 
 data "aws_iam_policy_document" "default" {
@@ -144,7 +144,7 @@ resource "aws_s3_bucket" "default" {
   }
 
   logging {
-    target_bucket = "${module.s3_logs_bucket.bucket_id}"
+    target_bucket = "${module.access_logs_bucket.bucket_id}"
   }
 
   tags = "${module.label.tags}"
