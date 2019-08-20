@@ -9,7 +9,7 @@ module "label" {
   enabled    = "${var.enabled}"
 }
 
-module "s3_logs_bucket" {
+module "access_logs_bucket" {
   source = "git::https://github.com/cloudposse/terraform-aws-s3-log-storage.git?ref=tags/0.4.1"
 
   enabled = "${var.enabled}"
