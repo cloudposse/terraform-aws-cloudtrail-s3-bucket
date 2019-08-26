@@ -80,4 +80,5 @@ module "s3_bucket" {
   delimiter                          = var.delimiter
   attributes                         = var.attributes
   tags                               = var.tags
+  cloud_posse_tags                   = var.cloud_posse_tags
 }
