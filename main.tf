@@ -1,12 +1,13 @@
 module "label" {
-  source     = "git::https://github.com/cloudposse/terraform-null-label.git?ref=tags/0.14.1"
-  enabled    = var.enabled
-  namespace  = var.namespace
-  stage      = var.stage
-  name       = var.name
-  delimiter  = var.delimiter
-  attributes = var.attributes
-  tags       = var.tags
+  source      = "git::https://github.com/cloudposse/terraform-null-label.git?ref=tags/0.16.0"
+  enabled     = var.enabled
+  namespace   = var.namespace
+  stage       = var.stage
+  environment = var.environment
+  name        = var.name
+  delimiter   = var.delimiter
+  attributes  = var.attributes
+  tags        = var.tags
 }
 
 data "aws_iam_policy_document" "default" {
@@ -57,10 +58,11 @@ data "aws_iam_policy_document" "default" {
 }
 
 module "s3_bucket" {
-  source                             = "git::https://github.com/cloudposse/terraform-aws-s3-log-storage.git?ref=tags/0.6.0"
+  source                             = "git::https://github.com/cloudposse/terraform-aws-s3-log-storage.git?ref=tags/0.7.0"
   enabled                            = var.enabled
   namespace                          = var.namespace
   stage                              = var.stage
+  environment                        = var.environment
   name                               = var.name
   region                             = var.region
   acl                                = var.acl
