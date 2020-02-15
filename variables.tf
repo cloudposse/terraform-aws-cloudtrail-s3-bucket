@@ -116,6 +116,7 @@ variable "glacier_transition_days" {
 
 variable "enable_glacier_transition" {
   type        = bool
+  default     = false
   description = "Glacier transition might just increase your bill. Set to false to disable lifecycle transitions to AWS Glacier." 
 }
 
