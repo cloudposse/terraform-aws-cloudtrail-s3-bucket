@@ -130,6 +130,7 @@ Available targets:
 | acl | The canned ACL to apply. We recommend log-delivery-write for compatibility with AWS services | string | `log-delivery-write` | no |
 | attributes | Additional attributes (e.g. `1`) | list(string) | `<list>` | no |
 | delimiter | Delimiter to be used between `namespace`, `environment`, `stage`, `name` and `attributes` | string | `-` | no |
+| enable_glacier_transition | Glacier transition might just increase your bill. Set to false to disable lifecycle transitions to AWS Glacier. | bool | `false` | no |
 | enabled | Set to `false` to prevent the module from creating any resources | bool | `true` | no |
 | environment | Environment, e.g. 'prod', 'staging', 'dev', 'pre-prod', 'UAT' | string | `` | no |
 | expiration_days | Number of days after which to expunge the objects | string | `90` | no |
