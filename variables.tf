@@ -114,6 +114,12 @@ variable "glacier_transition_days" {
   default     = 60
 }
 
+variable "enable_glacier_transition" {
+  type        = bool
+  default     = false
+  description = "Glacier transition might just increase your bill. Set to false to disable lifecycle transitions to AWS Glacier."
+}
+
 variable "expiration_days" {
   description = "Number of days after which to expunge the objects"
   default     = 90

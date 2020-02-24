@@ -58,7 +58,7 @@ data "aws_iam_policy_document" "default" {
 }
 
 module "s3_bucket" {
-  source                             = "git::https://github.com/cloudposse/terraform-aws-s3-log-storage.git?ref=tags/0.7.0"
+  source                             = "git::https://github.com/cloudposse/terraform-aws-s3-log-storage.git?ref=tags/0.8.0"
   enabled                            = var.enabled
   namespace                          = var.namespace
   stage                              = var.stage
@@ -76,6 +76,7 @@ module "s3_bucket" {
   noncurrent_version_transition_days = var.noncurrent_version_transition_days
   standard_transition_days           = var.standard_transition_days
   glacier_transition_days            = var.glacier_transition_days
+  enable_glacier_transition          = var.enable_glacier_transition
   expiration_days                    = var.expiration_days
   sse_algorithm                      = var.sse_algorithm
   kms_master_key_arn                 = var.kms_master_key_arn
