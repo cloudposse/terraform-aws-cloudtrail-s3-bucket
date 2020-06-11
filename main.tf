@@ -65,7 +65,6 @@ module "s3_bucket" {
   environment                        = var.environment
   name                               = var.name
   region                             = var.region
-  arn_format                         = var.arn_format
   acl                                = var.acl
   policy                             = join("", data.aws_iam_policy_document.default.*.json)
   force_destroy                      = var.force_destroy
