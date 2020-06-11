@@ -26,7 +26,7 @@ data "aws_iam_policy_document" "default" {
     ]
 
     resources = [
-      "arn:aws:s3:::${module.label.id}",
+      "${var.arn_format}:s3:::${module.label.id}",
     ]
   }
 
@@ -43,7 +43,7 @@ data "aws_iam_policy_document" "default" {
     ]
 
     resources = [
-      "arn:aws:s3:::${module.label.id}/*",
+      "${var.arn_format}:s3:::${module.label.id}/*",
     ]
 
     condition {
@@ -65,6 +65,7 @@ module "s3_bucket" {
   environment                        = var.environment
   name                               = var.name
   region                             = var.region
+  arn_format                         = var.arn_format
   acl                                = var.acl
   policy                             = join("", data.aws_iam_policy_document.default.*.json)
   force_destroy                      = var.force_destroy

@@ -3,6 +3,7 @@
 | Name | Description | Type | Default | Required |
 |------|-------------|:----:|:-----:|:-----:|
 | acl | The canned ACL to apply. We recommend log-delivery-write for compatibility with AWS services | string | `log-delivery-write` | no |
+| arn_format | ARN format to be used. May be changed to support deployment in GovCloud/China regions. | string | `arn:aws` | no |
 | attributes | Additional attributes (e.g. `1`) | list(string) | `<list>` | no |
 | delimiter | Delimiter to be used between `namespace`, `environment`, `stage`, `name` and `attributes` | string | `-` | no |
 | enable_glacier_transition | Glacier transition might just increase your bill. Set to false to disable lifecycle transitions to AWS Glacier. | bool | `false` | no |
