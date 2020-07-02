@@ -26,7 +26,7 @@ data "aws_iam_policy_document" "default" {
     ]
 
     resources = [
-      "arn:aws:s3:::${module.label.id}",
+      "${var.arn_format}:s3:::${module.label.id}",
     ]
   }
 
@@ -43,7 +43,7 @@ data "aws_iam_policy_document" "default" {
     ]
 
     resources = [
-      "arn:aws:s3:::${module.label.id}/*",
+      "${var.arn_format}:s3:::${module.label.id}/*",
     ]
 
     condition {
