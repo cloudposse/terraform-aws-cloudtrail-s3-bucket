@@ -1,51 +1,3 @@
-variable "namespace" {
-  type        = string
-  default     = ""
-  description = "Namespace, which could be your organization name or abbreviation, e.g. 'eg' or 'cp'"
-}
-
-variable "environment" {
-  type        = string
-  default     = ""
-  description = "Environment, e.g. 'prod', 'staging', 'dev', 'pre-prod', 'UAT'"
-}
-
-variable "stage" {
-  type        = string
-  default     = ""
-  description = "Stage, e.g. 'prod', 'staging', 'dev', OR 'source', 'build', 'test', 'deploy', 'release'"
-}
-
-variable "name" {
-  type        = string
-  default     = ""
-  description = "Solution name, e.g. 'app' or 'jenkins'"
-}
-
-variable "delimiter" {
-  type        = string
-  default     = "-"
-  description = "Delimiter to be used between `namespace`, `environment`, `stage`, `name` and `attributes`"
-}
-
-variable "attributes" {
-  type        = list(string)
-  default     = []
-  description = "Additional attributes (e.g. `1`)"
-}
-
-variable "tags" {
-  type        = map(string)
-  default     = {}
-  description = "Additional tags (e.g. `map('BusinessUnit','XYZ')`"
-}
-
-variable "enabled" {
-  type        = bool
-  description = "Set to `false` to prevent the module from creating any resources"
-  default     = true
-}
-
 variable "acl" {
   type        = string
   description = "The canned ACL to apply. We recommend log-delivery-write for compatibility with AWS services"
@@ -68,12 +20,6 @@ variable "lifecycle_tags" {
   type        = map(string)
   description = "Tags filter. Used to manage object lifecycle events"
   default     = {}
-}
-
-variable "region" {
-  type        = string
-  description = "If specified, the AWS region this bucket should reside in. Otherwise, the region used by the callee"
-  default     = ""
 }
 
 variable "arn_format" {

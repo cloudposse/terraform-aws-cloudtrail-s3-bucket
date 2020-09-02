@@ -1,6 +1,6 @@
 module github.com/cloudposse/terraform-aws-cloudtrail-s3-bucket
 
-go 1.13
+go 1.14
 
 require (
 	github.com/aws/aws-sdk-go v1.34.6 // indirect

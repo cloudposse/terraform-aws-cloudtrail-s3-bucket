@@ -60,10 +60,9 @@ usage: |-
   ```hcl
   module "s3_bucket" {
     source    = "git::https://github.com/cloudposse/terraform-aws-cloudtrail-s3-bucket.git?ref=master"
-    namespace = "cp"
+    namespace = "eg"
     stage     = "prod"
     name      = "cluster"
-    region    = "us-east-1"
   }
   ```
 

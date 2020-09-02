@@ -1,17 +1,5 @@
-module "label" {
-  source      = "git::https://github.com/cloudposse/terraform-null-label.git?ref=tags/0.17.0"
-  enabled     = var.enabled
-  namespace   = var.namespace
-  stage       = var.stage
-  environment = var.environment
-  name        = var.name
-  delimiter   = var.delimiter
-  attributes  = var.attributes
-  tags        = var.tags
-}
-
 data "aws_iam_policy_document" "default" {
-  count = var.enabled ? 1 : 0
+  count = module.this.enabled ? 1 : 0
 
   statement {
     sid = "AWSCloudTrailAclCheck"
@@ -26,7 +14,7 @@ data "aws_iam_policy_document" "default" {
     ]
 
     resources = [
-      "${var.arn_format}:s3:::${module.label.id}",
+      "${var.arn_format}:s3:::${module.this.id}",
     ]
   }
 
@@ -43,7 +31,7 @@ data "aws_iam_policy_document" "default" {
     ]
 
     resources = [
-      "${var.arn_format}:s3:::${module.label.id}/*",
+      "${var.arn_format}:s3:::${module.this.id}/*",
     ]
 
     condition {
@@ -58,13 +46,9 @@ data "aws_iam_policy_document" "default" {
 }
 
 module "s3_bucket" {
-  source                                 = "git::https://github.com/cloudposse/terraform-aws-s3-log-storage.git?ref=tags/0.13.1"
-  enabled                                = var.enabled
-  namespace                              = var.namespace
-  stage                                  = var.stage
-  environment                            = var.environment
-  name                                   = var.name
-  region                                 = var.region
+  source  = "git::https://github.com/cloudposse/terraform-aws-s3-log-storage.git?ref=tags/0.14.0"
+  enabled = module.this.enabled
+
   acl                                    = var.acl
   policy                                 = join("", data.aws_iam_policy_document.default.*.json)
   force_destroy                          = var.force_destroy
@@ -86,7 +70,6 @@ module "s3_bucket" {
   ignore_public_acls                     = var.ignore_public_acls
   restrict_public_buckets                = var.restrict_public_buckets
   access_log_bucket_name                 = var.access_log_bucket_name
-  delimiter                              = var.delimiter
-  attributes                             = var.attributes
-  tags                                   = var.tags
+
+  context = module.this.context
 }
