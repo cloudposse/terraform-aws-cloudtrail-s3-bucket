@@ -47,7 +47,7 @@ data "aws_iam_policy_document" "default" {
 
 module "s3_bucket" {
   source  = "cloudposse/s3-log-storage/aws"
-  version = "0.14.0"
+  version = "0.17.0"
   enabled = module.this.enabled
 
   acl                                    = var.acl
