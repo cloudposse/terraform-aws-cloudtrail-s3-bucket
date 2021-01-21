@@ -36,8 +36,6 @@ module "s3_bucket" {
   access_log_bucket_name                 = local.access_log_bucket_name
 
   context = module.this.context
-
-  depends_on = [module.s3_access_log_bucket]
 }
 
 module "s3_access_log_bucket" {
@@ -119,5 +117,5 @@ data "aws_iam_policy_document" "default" {
 }
 
 locals {
-  access_log_bucket_name = var.create_access_log_bucket == true ? module.access_log_label.id : var.access_log_bucket_name
+  access_log_bucket_name = var.create_access_log_bucket == true ? module.s3_access_log_bucket.bucket_id : var.access_log_bucket_name
 }
