@@ -124,3 +124,9 @@ variable "access_log_bucket_name" {
   default     = ""
   description = "Name of the S3 bucket where s3 access log will be sent to"
 }
+
+variable "create_access_log_bucket" {
+  type        = bool
+  default     = false
+  description = "A flag to indicate if a bucket for s3 access logs should be created"
+}
