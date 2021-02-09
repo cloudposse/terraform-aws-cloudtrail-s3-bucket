@@ -1,7 +1,7 @@
 
 module "access_log_label" {
   source  = "cloudposse/label/null"
-  version = "0.22.1"
+  version = "0.24.1"
 
   name = "cloudtrail-access-log"
 
