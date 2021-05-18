@@ -69,8 +69,6 @@ module "s3_access_log_bucket" {
   context    = module.this.context
 }
 
-data "aws_partition" "current" {}
-
 data "aws_iam_policy_document" "default" {
   count = module.this.enabled ? 1 : 0
 
@@ -117,6 +115,8 @@ data "aws_iam_policy_document" "default" {
     }
   }
 }
+
+data "aws_partition" "current" {}
 
 locals {
   access_log_bucket_name = var.create_access_log_bucket == true ? module.s3_access_log_bucket.bucket_id : var.access_log_bucket_name
