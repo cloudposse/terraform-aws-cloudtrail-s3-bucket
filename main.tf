@@ -10,7 +10,7 @@ module "access_log_label" {
 
 module "s3_bucket" {
   source  = "cloudposse/s3-log-storage/aws"
-  version = "0.18.0"
+  version = "0.23.0"
   enabled = module.this.enabled
 
   acl                                    = var.acl
@@ -34,13 +34,14 @@ module "s3_bucket" {
   ignore_public_acls                     = var.ignore_public_acls
   restrict_public_buckets                = var.restrict_public_buckets
   access_log_bucket_name                 = local.access_log_bucket_name
+  allow_ssl_requests_only                = var.allow_ssl_requests_only
 
   context = module.this.context
 }
 
 module "s3_access_log_bucket" {
   source  = "cloudposse/s3-log-storage/aws"
-  version = "0.18.0"
+  version = "0.23.0"
   enabled = module.this.enabled && var.create_access_log_bucket
 
   acl                                    = var.acl
@@ -64,6 +65,7 @@ module "s3_access_log_bucket" {
   ignore_public_acls                     = var.ignore_public_acls
   restrict_public_buckets                = var.restrict_public_buckets
   access_log_bucket_name                 = ""
+  allow_ssl_requests_only                = var.allow_ssl_requests_only
 
   attributes = ["access-logs"]
   context    = module.this.context
