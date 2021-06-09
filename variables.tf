@@ -130,3 +130,9 @@ variable "create_access_log_bucket" {
   default     = false
   description = "A flag to indicate if a bucket for s3 access logs should be created"
 }
+
+variable "allow_ssl_requests_only" {
+  type        = bool
+  default     = false
+  description = "Set to `true` to require requests to use Secure Socket Layer (HTTPS/SSL). This will explicitly deny access to HTTP requests"
+}
