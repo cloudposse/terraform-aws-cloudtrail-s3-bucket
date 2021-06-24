@@ -22,12 +22,6 @@ variable "lifecycle_tags" {
   default     = {}
 }
 
-variable "arn_format" {
-  type        = string
-  default     = "arn:aws"
-  description = "ARN format to be used. May be changed to support deployment in GovCloud/China regions."
-}
-
 variable "force_destroy" {
   type        = bool
   description = "(Optional, Default:false ) A boolean that indicates all objects should be deleted from the bucket so that the bucket can be destroyed without error. These objects are not recoverable"
