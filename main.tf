@@ -14,7 +14,7 @@ module "s3_bucket" {
   enabled = module.this.enabled
 
   acl                                    = var.acl
-  policy                                 = join("", data.aws_iam_policy_document.default.*.json)
+  policy                                 = var.policy == "" ? join("", data.aws_iam_policy_document.default.*.json) : var.policy
   force_destroy                          = var.force_destroy
   versioning_enabled                     = var.versioning_enabled
   lifecycle_rule_enabled                 = var.lifecycle_rule_enabled
@@ -72,7 +72,7 @@ module "s3_access_log_bucket" {
 }
 
 data "aws_iam_policy_document" "default" {
-  count = module.this.enabled ? 1 : 0
+  count = (var.policy == "" && module.this.enabled) ? 1 : 0
 
   statement {
     sid = "AWSCloudTrailAclCheck"
