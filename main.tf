@@ -14,7 +14,7 @@ module "s3_bucket" {
   enabled = module.this.enabled
 
   acl                                    = var.acl
-  policy                                 = var.policy == "" ? join("", data.aws_iam_policy_document.default.*.json) : var.policy
+  policy                                 = join("", data.aws_iam_policy_document.default.*.json)
   force_destroy                          = var.force_destroy
   versioning_enabled                     = var.versioning_enabled
   lifecycle_rule_enabled                 = var.lifecycle_rule_enabled
@@ -72,7 +72,8 @@ module "s3_access_log_bucket" {
 }
 
 data "aws_iam_policy_document" "default" {
-  count = (var.policy == "" && module.this.enabled) ? 1 : 0
+  count       = module.this.enabled ? 1 : 0
+  source_json = var.policy == "" ? null : var.policy
 
   statement {
     sid = "AWSCloudTrailAclCheck"
@@ -96,7 +97,7 @@ data "aws_iam_policy_document" "default" {
 
     principals {
       type        = "Service"
-      identifiers = ["config.amazonaws.com", "cloudtrail.amazonaws.com"]
+      identifiers = ["cloudtrail.amazonaws.com", "config.amazonaws.com"]
     }
 
     actions = [
