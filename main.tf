@@ -36,8 +36,8 @@ module "s3_bucket" {
   access_log_bucket_name                 = local.access_log_bucket_name
   allow_ssl_requests_only                = var.allow_ssl_requests_only
   bucket_notifications_enabled           = var.bucket_notifications_enabled
-  bucket_notifications_type       = var. bucket_notifications_type
-  bucket_notifications_prefix = var. bucket_notifications_prefix
+  bucket_notifications_type              = var.bucket_notifications_type
+  bucket_notifications_prefix            = var.bucket_notifications_prefix
 
   context = module.this.context
 }
