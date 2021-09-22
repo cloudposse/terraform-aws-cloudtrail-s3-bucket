@@ -10,7 +10,7 @@ module "access_log_label" {
 
 module "s3_bucket" {
   source  = "cloudposse/s3-log-storage/aws"
-  version = "0.24.1"
+  version = "0.25.0"
   enabled = module.this.enabled
 
   acl                                    = var.acl
@@ -35,13 +35,16 @@ module "s3_bucket" {
   restrict_public_buckets                = var.restrict_public_buckets
   access_log_bucket_name                 = local.access_log_bucket_name
   allow_ssl_requests_only                = var.allow_ssl_requests_only
+  bucket_notifications_enabled           = var.bucket_notifications_enabled
+  bucket_notifications_type       = var. bucket_notifications_type
+  bucket_notifications_prefix = var. bucket_notifications_prefix
 
   context = module.this.context
 }
 
 module "s3_access_log_bucket" {
   source  = "cloudposse/s3-log-storage/aws"
-  version = "0.24.1"
+  version = "0.25.0"
   enabled = module.this.enabled && var.create_access_log_bucket
 
   acl                                    = var.acl
