@@ -17,3 +17,8 @@ output "prefix" {
   value       = module.s3_bucket.prefix
   description = "Prefix configured for lifecycle rules"
 }
+
+output "bucket_notifications_sqs_queue_arn" {
+  value       = module.s3_bucket.bucket_notifications_sqs_queue_arn
+  description = "Notifications SQS queue ARN"
+}

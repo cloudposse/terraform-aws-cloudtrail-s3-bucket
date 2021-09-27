@@ -19,8 +19,8 @@
 | Name | Source | Version |
 |------|--------|---------|
 | <a name="module_access_log_label"></a> [access\_log\_label](#module\_access\_log\_label) | cloudposse/label/null | 0.25.0 |
-| <a name="module_s3_access_log_bucket"></a> [s3\_access\_log\_bucket](#module\_s3\_access\_log\_bucket) | cloudposse/s3-log-storage/aws | 0.24.1 |
-| <a name="module_s3_bucket"></a> [s3\_bucket](#module\_s3\_bucket) | cloudposse/s3-log-storage/aws | 0.24.1 |
+| <a name="module_s3_access_log_bucket"></a> [s3\_access\_log\_bucket](#module\_s3\_access\_log\_bucket) | cloudposse/s3-log-storage/aws | 0.25.0 |
+| <a name="module_s3_bucket"></a> [s3\_bucket](#module\_s3\_bucket) | cloudposse/s3-log-storage/aws | 0.25.0 |
 | <a name="module_this"></a> [this](#module\_this) | cloudposse/label/null | 0.25.0 |
 
 ## Resources
@@ -42,6 +42,9 @@
 | <a name="input_attributes"></a> [attributes](#input\_attributes) | ID element. Additional attributes (e.g. `workers` or `cluster`) to add to `id`,<br>in the order they appear in the list. New attributes are appended to the<br>end of the list. The elements of the list are joined by the `delimiter`<br>and treated as a single ID element. | `list(string)` | `[]` | no |
 | <a name="input_block_public_acls"></a> [block\_public\_acls](#input\_block\_public\_acls) | Set to `false` to disable the blocking of new public access lists on the bucket | `bool` | `true` | no |
 | <a name="input_block_public_policy"></a> [block\_public\_policy](#input\_block\_public\_policy) | Set to `false` to disable the blocking of new public policies on the bucket | `bool` | `true` | no |
+| <a name="input_bucket_notifications_enabled"></a> [bucket\_notifications\_enabled](#input\_bucket\_notifications\_enabled) | Send notifications for the object created events. Used for 3rd-party log collection from a bucket. This does not affect access log bucket created by this module. To enable bucket notifications on the access log bucket, create it separately using the cloudposse/s3-log-storage/aws | `bool` | `false` | no |
+| <a name="input_bucket_notifications_prefix"></a> [bucket\_notifications\_prefix](#input\_bucket\_notifications\_prefix) | Prefix filter. Used to manage object notifications | `string` | `""` | no |
+| <a name="input_bucket_notifications_type"></a> [bucket\_notifications\_type](#input\_bucket\_notifications\_type) | Type of the notification configuration. Only SQS is supported. | `string` | `"SQS"` | no |
 | <a name="input_context"></a> [context](#input\_context) | Single object for setting entire context at once.<br>See description of individual variables for details.<br>Leave string and numeric variables as `null` to use default value.<br>Individual variable settings (non-null) override settings in context object,<br>except for attributes, tags, and additional\_tag\_map, which are merged. | `any` | <pre>{<br>  "additional_tag_map": {},<br>  "attributes": [],<br>  "delimiter": null,<br>  "descriptor_formats": {},<br>  "enabled": true,<br>  "environment": null,<br>  "id_length_limit": null,<br>  "label_key_case": null,<br>  "label_order": [],<br>  "label_value_case": null,<br>  "labels_as_tags": [<br>    "unset"<br>  ],<br>  "name": null,<br>  "namespace": null,<br>  "regex_replace_chars": null,<br>  "stage": null,<br>  "tags": {},<br>  "tenant": null<br>}</pre> | no |
 | <a name="input_create_access_log_bucket"></a> [create\_access\_log\_bucket](#input\_create\_access\_log\_bucket) | A flag to indicate if a bucket for s3 access logs should be created | `bool` | `false` | no |
 | <a name="input_delimiter"></a> [delimiter](#input\_delimiter) | Delimiter to be used between ID elements.<br>Defaults to `-` (hyphen). Set to `""` to use no delimiter at all. | `string` | `null` | no |
@@ -83,5 +86,6 @@
 | <a name="output_bucket_arn"></a> [bucket\_arn](#output\_bucket\_arn) | Bucket ARN |
 | <a name="output_bucket_domain_name"></a> [bucket\_domain\_name](#output\_bucket\_domain\_name) | FQDN of bucket |
 | <a name="output_bucket_id"></a> [bucket\_id](#output\_bucket\_id) | Bucket ID |
+| <a name="output_bucket_notifications_sqs_queue_arn"></a> [bucket\_notifications\_sqs\_queue\_arn](#output\_bucket\_notifications\_sqs\_queue\_arn) | Notifications SQS queue ARN |
 | <a name="output_prefix"></a> [prefix](#output\_prefix) | Prefix configured for lifecycle rules |
 <!-- markdownlint-restore -->
