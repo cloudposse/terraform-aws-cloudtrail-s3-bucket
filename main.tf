@@ -75,7 +75,8 @@ module "s3_access_log_bucket" {
 }
 
 data "aws_iam_policy_document" "default" {
-  count = module.this.enabled ? 1 : 0
+  count       = module.this.enabled ? 1 : 0
+  source_json = var.policy == "" ? null : var.policy
 
   statement {
     sid = "AWSCloudTrailAclCheck"
@@ -99,7 +100,7 @@ data "aws_iam_policy_document" "default" {
 
     principals {
       type        = "Service"
-      identifiers = ["config.amazonaws.com", "cloudtrail.amazonaws.com"]
+      identifiers = ["cloudtrail.amazonaws.com", "config.amazonaws.com"]
     }
 
     actions = [
