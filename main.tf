@@ -44,7 +44,7 @@ module "s3_bucket" {
 
 module "s3_access_log_bucket" {
   source  = "cloudposse/s3-log-storage/aws"
-  version = "0.25.0"
+  version = "0.26.0"
   enabled = module.this.enabled && var.create_access_log_bucket
 
   acl                                    = var.acl
