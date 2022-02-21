@@ -1,3 +1,10 @@
+locals {
+  enabled                = module.this.enabled
+  access_log_bucket_name = var.create_access_log_bucket == true ? module.s3_access_log_bucket.bucket_id : var.access_log_bucket_name
+  arn_format             = "arn:${data.aws_partition.current.partition}"
+}
+
+data "aws_partition" "current" {}
 
 module "access_log_label" {
   source  = "cloudposse/label/null"
@@ -11,7 +18,8 @@ module "access_log_label" {
 module "s3_bucket" {
   source  = "cloudposse/s3-log-storage/aws"
   version = "0.26.0"
-  enabled = module.this.enabled
+
+  enabled = local.enabled
 
   acl                                    = var.acl
   policy                                 = join("", data.aws_iam_policy_document.default.*.json)
@@ -45,7 +53,8 @@ module "s3_bucket" {
 module "s3_access_log_bucket" {
   source  = "cloudposse/s3-log-storage/aws"
   version = "0.26.0"
-  enabled = module.this.enabled && var.create_access_log_bucket
+
+  enabled = local.enabled && var.create_access_log_bucket
 
   acl                                    = var.acl
   policy                                 = ""
@@ -75,7 +84,8 @@ module "s3_access_log_bucket" {
 }
 
 data "aws_iam_policy_document" "default" {
-  count       = module.this.enabled ? 1 : 0
+  count = local.enabled ? 1 : 0
+
   source_json = var.policy == "" ? null : var.policy
 
   statement {
@@ -120,11 +130,4 @@ data "aws_iam_policy_document" "default" {
       ]
     }
   }
-}
-
-data "aws_partition" "current" {}
-
-locals {
-  access_log_bucket_name = var.create_access_log_bucket == true ? module.s3_access_log_bucket.bucket_id : var.access_log_bucket_name
-  arn_format             = "arn:${data.aws_partition.current.partition}"
 }
