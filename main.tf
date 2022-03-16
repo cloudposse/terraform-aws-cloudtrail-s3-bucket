@@ -10,65 +10,120 @@ module "access_log_label" {
 
 module "s3_bucket" {
   source  = "cloudposse/s3-log-storage/aws"
-  version = "0.26.0"
+  version = "0.28.0"
   enabled = module.this.enabled
 
-  acl                                    = var.acl
-  policy                                 = join("", data.aws_iam_policy_document.default.*.json)
-  force_destroy                          = var.force_destroy
-  versioning_enabled                     = var.versioning_enabled
-  lifecycle_rule_enabled                 = var.lifecycle_rule_enabled
-  lifecycle_prefix                       = var.lifecycle_prefix
-  lifecycle_tags                         = var.lifecycle_tags
-  noncurrent_version_expiration_days     = var.noncurrent_version_expiration_days
-  noncurrent_version_transition_days     = var.noncurrent_version_transition_days
-  standard_transition_days               = var.standard_transition_days
-  glacier_transition_days                = var.glacier_transition_days
-  enable_glacier_transition              = var.enable_glacier_transition
-  expiration_days                        = var.expiration_days
-  abort_incomplete_multipart_upload_days = var.abort_incomplete_multipart_upload_days
-  sse_algorithm                          = var.sse_algorithm
-  kms_master_key_arn                     = var.kms_master_key_arn
-  block_public_acls                      = var.block_public_acls
-  block_public_policy                    = var.block_public_policy
-  ignore_public_acls                     = var.ignore_public_acls
-  restrict_public_buckets                = var.restrict_public_buckets
-  access_log_bucket_name                 = local.access_log_bucket_name
-  allow_ssl_requests_only                = var.allow_ssl_requests_only
-  bucket_notifications_enabled           = var.bucket_notifications_enabled
-  bucket_notifications_type              = var.bucket_notifications_type
-  bucket_notifications_prefix            = var.bucket_notifications_prefix
+  acl                = var.acl
+  policy             = join("", data.aws_iam_policy_document.default.*.json)
+  force_destroy      = var.force_destroy
+  versioning_enabled = var.versioning_enabled
+
+  sse_algorithm                = var.sse_algorithm
+  kms_master_key_arn           = var.kms_master_key_arn
+  block_public_acls            = var.block_public_acls
+  block_public_policy          = var.block_public_policy
+  ignore_public_acls           = var.ignore_public_acls
+  restrict_public_buckets      = var.restrict_public_buckets
+  access_log_bucket_name       = local.access_log_bucket_name
+  allow_ssl_requests_only      = var.allow_ssl_requests_only
+  bucket_notifications_enabled = var.bucket_notifications_enabled
+  bucket_notifications_type    = var.bucket_notifications_type
+  bucket_notifications_prefix  = var.bucket_notifications_prefix
+
+  lifecycle_configuration_rules = [
+    {
+      enabled = true
+      id      = "v2rule"
+
+      abort_incomplete_multipart_upload_days = var.abort_incomplete_multipart_upload_days
+      enable_glacier_transition              = var.enable_glacier_transition
+      prefix                                 = var.lifecycle_prefix
+      tags                                   = var.lifecycle_tags
+
+      filter_and = null
+
+      expiration = {
+        days = var.expiration_days
+      }
+
+      noncurrent_version_expiration = {
+        noncurrent_days = var.noncurrent_version_expiration_days
+      }
+
+      transition = [{
+        days          = var.standard_transition_days
+        storage_class = "STANDARD_IA"
+        },
+        {
+          days          = var.glacier_transition_days
+          storage_class = "GLACIER"
+      }]
+
+      noncurrent_version_transition = [{
+        noncurrent_days = var.noncurrent_version_transition_days
+        storage_class   = "ONEZONE_IA" # string/enum, one of GLACIER, STANDARD_IA, ONEZONE_IA, INTELLIGENT_TIERING, DEEP_ARCHIVE, GLACIER_IR.
+      }]
+    }
+  ]
+
 
   context = module.this.context
 }
 
 module "s3_access_log_bucket" {
   source  = "cloudposse/s3-log-storage/aws"
-  version = "0.26.0"
+  version = "0.28.0"
   enabled = module.this.enabled && var.create_access_log_bucket
 
-  acl                                    = var.acl
-  policy                                 = ""
-  force_destroy                          = var.force_destroy
-  versioning_enabled                     = var.versioning_enabled
-  lifecycle_rule_enabled                 = var.lifecycle_rule_enabled
-  lifecycle_prefix                       = var.lifecycle_prefix
-  lifecycle_tags                         = var.lifecycle_tags
-  noncurrent_version_expiration_days     = var.noncurrent_version_expiration_days
-  noncurrent_version_transition_days     = var.noncurrent_version_transition_days
-  standard_transition_days               = var.standard_transition_days
-  glacier_transition_days                = var.glacier_transition_days
-  enable_glacier_transition              = var.enable_glacier_transition
-  expiration_days                        = var.expiration_days
-  abort_incomplete_multipart_upload_days = var.abort_incomplete_multipart_upload_days
-  sse_algorithm                          = var.sse_algorithm
-  kms_master_key_arn                     = var.kms_master_key_arn
-  block_public_acls                      = var.block_public_acls
-  block_public_policy                    = var.block_public_policy
-  ignore_public_acls                     = var.ignore_public_acls
-  restrict_public_buckets                = var.restrict_public_buckets
-  access_log_bucket_name                 = ""
-  allow_ssl_requests_only                = var.allow_ssl_requests_only
+  acl                     = var.acl
+  policy                  = ""
+  force_destroy           = var.force_destroy
+  versioning_enabled      = var.versioning_enabled
+  sse_algorithm           = var.sse_algorithm
+  kms_master_key_arn      = var.kms_master_key_arn
+  block_public_acls       = var.block_public_acls
+  block_public_policy     = var.block_public_policy
+  ignore_public_acls      = var.ignore_public_acls
+  restrict_public_buckets = var.restrict_public_buckets
+  access_log_bucket_name  = ""
+  allow_ssl_requests_only = var.allow_ssl_requests_only
+
+  lifecycle_configuration_rules = [
+    {
+      enabled = true
+      id      = "v2rule"
+
+      abort_incomplete_multipart_upload_days = var.abort_incomplete_multipart_upload_days
+      enable_glacier_transition              = var.enable_glacier_transition
+      prefix                                 = var.lifecycle_prefix
+      tags                                   = var.lifecycle_tags
+
+      filter_and = null
+
+      expiration = {
+        days = var.expiration_days
+      }
+
+      noncurrent_version_expiration = {
+        noncurrent_days = var.noncurrent_version_expiration_days
+      }
+
+      transition = [{
+        days          = var.standard_transition_days
+        storage_class = "STANDARD_IA"
+        },
+        {
+          days          = var.glacier_transition_days
+          storage_class = "GLACIER"
+      }]
+
+      noncurrent_version_transition = [{
+        noncurrent_days = var.noncurrent_version_transition_days
+        storage_class   = "ONEZONE_IA" # string/enum, one of GLACIER, STANDARD_IA, ONEZONE_IA, INTELLIGENT_TIERING, DEEP_ARCHIVE, GLACIER_IR.
+      }]
+    }
+  ]
+
 
   attributes = ["access-logs"]
   context    = module.this.context
