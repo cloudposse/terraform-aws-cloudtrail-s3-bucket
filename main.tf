@@ -10,7 +10,7 @@ module "access_log_label" {
 
 module "s3_bucket" {
   source  = "cloudposse/s3-log-storage/aws"
-  version = "0.26.0"
+  version = "0.28.0"
   enabled = module.this.enabled
 
   acl                                    = var.acl
@@ -38,7 +38,7 @@ module "s3_bucket" {
   bucket_notifications_enabled           = var.bucket_notifications_enabled
   bucket_notifications_type              = var.bucket_notifications_type
   bucket_notifications_prefix            = var.bucket_notifications_prefix
-
+  s3_object_ownership                    = var.s3_object_ownership
   context = module.this.context
 }
 
