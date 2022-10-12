@@ -139,21 +139,21 @@ Available targets:
 | Name | Version |
 |------|---------|
 | <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 0.13.0 |
-| <a name="requirement_aws"></a> [aws](#requirement\_aws) | >= 3.0 |
+| <a name="requirement_aws"></a> [aws](#requirement\_aws) | >= 4.0 |
 
 ## Providers
 
 | Name | Version |
 |------|---------|
-| <a name="provider_aws"></a> [aws](#provider\_aws) | >= 3.0 |
+| <a name="provider_aws"></a> [aws](#provider\_aws) | >= 4.0 |
 
 ## Modules
 
 | Name | Source | Version |
 |------|--------|---------|
 | <a name="module_access_log_label"></a> [access\_log\_label](#module\_access\_log\_label) | cloudposse/label/null | 0.25.0 |
-| <a name="module_s3_access_log_bucket"></a> [s3\_access\_log\_bucket](#module\_s3\_access\_log\_bucket) | cloudposse/s3-log-storage/aws | 0.26.0 |
-| <a name="module_s3_bucket"></a> [s3\_bucket](#module\_s3\_bucket) | cloudposse/s3-log-storage/aws | 0.26.0 |
+| <a name="module_s3_access_log_bucket"></a> [s3\_access\_log\_bucket](#module\_s3\_access\_log\_bucket) | cloudposse/s3-log-storage/aws | 0.28.0 |
+| <a name="module_s3_bucket"></a> [s3\_bucket](#module\_s3\_bucket) | cloudposse/s3-log-storage/aws | 0.28.0 |
 | <a name="module_this"></a> [this](#module\_this) | cloudposse/label/null | 0.25.0 |
 
 ## Resources
@@ -380,7 +380,7 @@ Check out [our other projects][github], [follow us on twitter][twitter], [apply 
 
 [![README Footer][readme_footer_img]][readme_footer_link]
 [![Beacon][beacon]][website]
-
+<!-- markdownlint-disable -->
   [logo]: https://cloudposse.com/logo-300x69.svg
   [docs]: https://cpco.io/docs?utm_source=github&utm_medium=readme&utm_campaign=cloudposse/terraform-aws-cloudtrail-s3-bucket&utm_content=docs
   [website]: https://cpco.io/homepage?utm_source=github&utm_medium=readme&utm_campaign=cloudposse/terraform-aws-cloudtrail-s3-bucket&utm_content=website
@@ -411,3 +411,4 @@ Check out [our other projects][github], [follow us on twitter][twitter], [apply 
   [share_googleplus]: https://plus.google.com/share?url=https://github.com/cloudposse/terraform-aws-cloudtrail-s3-bucket
   [share_email]: mailto:?subject=terraform-aws-cloudtrail-s3-bucket&body=https://github.com/cloudposse/terraform-aws-cloudtrail-s3-bucket
   [beacon]: https://ga-beacon.cloudposse.com/UA-76589703-4/cloudposse/terraform-aws-cloudtrail-s3-bucket?pixel&cs=github&cm=readme&an=terraform-aws-cloudtrail-s3-bucket
+<!-- markdownlint-restore -->
