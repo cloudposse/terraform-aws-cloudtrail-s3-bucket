@@ -38,6 +38,7 @@ module "s3_bucket" {
   bucket_notifications_enabled           = var.bucket_notifications_enabled
   bucket_notifications_type              = var.bucket_notifications_type
   bucket_notifications_prefix            = var.bucket_notifications_prefix
+  object_lock_configuration              = var.object_lock_configuration
 
   context = module.this.context
 }
