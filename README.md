@@ -153,7 +153,7 @@ Available targets:
 |------|--------|---------|
 | <a name="module_access_log_label"></a> [access\_log\_label](#module\_access\_log\_label) | cloudposse/label/null | 0.25.0 |
 | <a name="module_s3_access_log_bucket"></a> [s3\_access\_log\_bucket](#module\_s3\_access\_log\_bucket) | cloudposse/s3-log-storage/aws | 0.26.0 |
-| <a name="module_s3_bucket"></a> [s3\_bucket](#module\_s3\_bucket) | cloudposse/s3-log-storage/aws | 0.26.0 |
+| <a name="module_s3_bucket"></a> [s3\_bucket](#module\_s3\_bucket) | cloudposse/s3-log-storage/aws | 1.1.0 |
 | <a name="module_this"></a> [this](#module\_this) | cloudposse/label/null | 0.25.0 |
 
 ## Resources
@@ -175,6 +175,7 @@ Available targets:
 | <a name="input_attributes"></a> [attributes](#input\_attributes) | ID element. Additional attributes (e.g. `workers` or `cluster`) to add to `id`,<br>in the order they appear in the list. New attributes are appended to the<br>end of the list. The elements of the list are joined by the `delimiter`<br>and treated as a single ID element. | `list(string)` | `[]` | no |
 | <a name="input_block_public_acls"></a> [block\_public\_acls](#input\_block\_public\_acls) | Set to `false` to disable the blocking of new public access lists on the bucket | `bool` | `true` | no |
 | <a name="input_block_public_policy"></a> [block\_public\_policy](#input\_block\_public\_policy) | Set to `false` to disable the blocking of new public policies on the bucket | `bool` | `true` | no |
+| <a name="input_bucket_key_enabled"></a> [bucket\_key\_enabled](#input\_bucket\_key\_enabled) | Set this to true to use Amazon S3 Bucket Keys for SSE-KMS, which reduce the cost of AWS KMS requests.<br><br>For more information, see: https://docs.aws.amazon.com/AmazonS3/latest/userguide/bucket-key.html | `bool` | `false` | no |
 | <a name="input_bucket_notifications_enabled"></a> [bucket\_notifications\_enabled](#input\_bucket\_notifications\_enabled) | Send notifications for the object created events. Used for 3rd-party log collection from a bucket. This does not affect access log bucket created by this module. To enable bucket notifications on the access log bucket, create it separately using the cloudposse/s3-log-storage/aws | `bool` | `false` | no |
 | <a name="input_bucket_notifications_prefix"></a> [bucket\_notifications\_prefix](#input\_bucket\_notifications\_prefix) | Prefix filter. Used to manage object notifications | `string` | `""` | no |
 | <a name="input_bucket_notifications_type"></a> [bucket\_notifications\_type](#input\_bucket\_notifications\_type) | Type of the notification configuration. Only SQS is supported. | `string` | `"SQS"` | no |
