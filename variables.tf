@@ -107,7 +107,6 @@ variable "bucket_key_enabled" {
   For more information, see: https://docs.aws.amazon.com/AmazonS3/latest/userguide/bucket-key.html
   EOT
   default     = false
-  nullable    = false
 }
 
 variable "block_public_acls" {
