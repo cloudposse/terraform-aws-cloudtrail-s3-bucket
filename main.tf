@@ -10,7 +10,7 @@ module "access_log_label" {
 
 module "s3_bucket" {
   source  = "cloudposse/s3-log-storage/aws"
-  version = "0.26.0"
+  version = "1.3.1"
   enabled = module.this.enabled
 
   acl                                    = var.acl
