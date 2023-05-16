@@ -1,13 +1,4 @@
 
-module "access_log_label" {
-  source  = "cloudposse/label/null"
-  version = "0.25.0"
-
-  name = "cloudtrail-access-log"
-
-  context = module.this.context
-}
-
 module "s3_bucket" {
   source  = "cloudposse/s3-log-storage/aws"
   version = "1.3.1"
@@ -45,7 +36,7 @@ module "s3_bucket" {
 module "s3_access_log_bucket" {
   source  = "cloudposse/s3-log-storage/aws"
   version = "1.3.1"
-  enabled = module.this.enabled && var.create_access_log_bucket
+  enabled = local.create_access_log_bucket
 
   acl                                    = var.acl
   policy                                 = ""
@@ -75,8 +66,8 @@ module "s3_access_log_bucket" {
 }
 
 data "aws_iam_policy_document" "default" {
-  count       = module.this.enabled ? 1 : 0
-  source_json = var.policy == "" ? null : var.policy
+  count                   = module.this.enabled ? 1 : 0
+  source_policy_documents = var.policy == "" ? null : [var.policy]
 
   statement {
     sid = "AWSCloudTrailAclCheck"
@@ -125,6 +116,7 @@ data "aws_iam_policy_document" "default" {
 data "aws_partition" "current" {}
 
 locals {
-  access_log_bucket_name = var.create_access_log_bucket == true ? module.s3_access_log_bucket.bucket_id : var.access_log_bucket_name
-  arn_format             = "arn:${data.aws_partition.current.partition}"
+  create_access_log_bucket = module.this.enabled && var.create_access_log_bucket
+  access_log_bucket_name   = local.create_access_log_bucket ? module.s3_access_log_bucket.bucket_id : var.access_log_bucket_name
+  arn_format               = "arn:${data.aws_partition.current.partition}"
 }
