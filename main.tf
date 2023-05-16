@@ -33,12 +33,29 @@ module "s3_bucket" {
   context = module.this.context
 }
 
+# This is a workaround for the "Invalid count argument" error caused
+# when `access_log_bucket_name = module.s3_access_log_bucket.bucket_id`
+
+module "access_log_bucket_name" {
+  source  = "cloudposse/label/null"
+  version = "0.25.0"
+
+  enabled = local.create_access_log_bucket && var.access_log_bucket_name == ""
+
+  id_length_limit = 63 # https://docs.aws.amazon.com/AmazonS3/latest/userguide/bucketnamingrules.html
+  attributes      = ["access-logs"]
+
+  context = module.this.context
+}
+
+
 module "s3_access_log_bucket" {
   source  = "cloudposse/s3-log-storage/aws"
   version = "1.3.1"
   enabled = local.create_access_log_bucket
 
   acl                                    = var.acl
+  bucket_name                            = local.access_log_bucket_name
   policy                                 = ""
   force_destroy                          = var.force_destroy
   versioning_enabled                     = var.versioning_enabled
@@ -117,6 +134,6 @@ data "aws_partition" "current" {}
 
 locals {
   create_access_log_bucket = module.this.enabled && var.create_access_log_bucket
-  access_log_bucket_name   = local.create_access_log_bucket ? module.s3_access_log_bucket.bucket_id : var.access_log_bucket_name
+  access_log_bucket_name   = local.create_access_log_bucket ? try(coalesce(var.access_log_bucket_name, module.access_log_bucket_name.id), "") : var.access_log_bucket_name
   arn_format               = "arn:${data.aws_partition.current.partition}"
 }
