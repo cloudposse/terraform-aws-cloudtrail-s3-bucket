@@ -152,8 +152,8 @@ Available targets:
 | Name | Source | Version |
 |------|--------|---------|
 | <a name="module_access_log_bucket_name"></a> [access\_log\_bucket\_name](#module\_access\_log\_bucket\_name) | cloudposse/label/null | 0.25.0 |
-| <a name="module_s3_access_log_bucket"></a> [s3\_access\_log\_bucket](#module\_s3\_access\_log\_bucket) | cloudposse/s3-log-storage/aws | 1.4.0 |
-| <a name="module_s3_bucket"></a> [s3\_bucket](#module\_s3\_bucket) | cloudposse/s3-log-storage/aws | 1.4.0 |
+| <a name="module_s3_access_log_bucket"></a> [s3\_access\_log\_bucket](#module\_s3\_access\_log\_bucket) | cloudposse/s3-log-storage/aws | 1.4.1 |
+| <a name="module_s3_bucket"></a> [s3\_bucket](#module\_s3\_bucket) | cloudposse/s3-log-storage/aws | 1.4.1 |
 | <a name="module_this"></a> [this](#module\_this) | cloudposse/label/null | 0.25.0 |
 
 ## Resources
