@@ -44,7 +44,7 @@ module "s3_bucket" {
 
 module "s3_access_log_bucket" {
   source  = "cloudposse/s3-log-storage/aws"
-  version = "0.26.0"
+  version = "1.0.0"
   enabled = module.this.enabled && var.create_access_log_bucket
 
   acl                                    = var.acl
@@ -76,7 +76,7 @@ module "s3_access_log_bucket" {
 
 data "aws_iam_policy_document" "default" {
   count       = module.this.enabled ? 1 : 0
-  source_json = var.policy == "" ? null : var.policy
+  source_policy_documents = [var.policy]
 
   statement {
     sid = "AWSCloudTrailAclCheck"
