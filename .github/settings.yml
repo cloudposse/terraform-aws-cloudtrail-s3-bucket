@@ -1,0 +1,7 @@
+# Upstream changes from _extends are only recognized when modifications are made to this file in the default branch.
+_extends: .github
+repository:
+  name: terraform-aws-cloudtrail-s3-bucket
+  description: S3 bucket with built in IAM policy to allow CloudTrail logs
+  homepage: https://cloudposse.com/accelerate
+  topics: aws, terraform, terraform-modules, cloudtrail, audit-logs, audit, s3, bucket, iam, iam-policy, hcl2
