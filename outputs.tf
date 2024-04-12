@@ -6,6 +6,10 @@ output "bucket_domain_name" {
 output "bucket_id" {
   value       = module.s3_bucket.bucket_id
   description = "Bucket ID"
+  depends_on = [
+    # The S3 bucket policy resource must be created before the bucket is referenced by CloudTrail
+    module.s3_bucket
+  ]
 }
 
 output "bucket_arn" {
