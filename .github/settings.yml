@@ -5,3 +5,4 @@ repository:
   description: S3 bucket with built in IAM policy to allow CloudTrail logs
   homepage: https://cloudposse.com/accelerate
   topics: aws, terraform, terraform-modules, cloudtrail, audit-logs, audit, s3, bucket, iam, iam-policy, hcl2
+
