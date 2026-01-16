@@ -40,7 +40,7 @@ module "access_log_bucket_name" {
   source  = "cloudposse/label/null"
   version = "0.25.0"
 
-  enabled = local.create_access_log_bucket && var.access_log_bucket_name == ""
+  enabled = local.create_access_log_bucket && coalesce(var.access_log_bucket_name, "") == ""
 
   id_length_limit = 63 # https://docs.aws.amazon.com/AmazonS3/latest/userguide/bucketnamingrules.html
   attributes      = ["access-logs"]
