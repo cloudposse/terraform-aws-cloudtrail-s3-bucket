@@ -57,6 +57,7 @@ description: |-
   1. Forced [server-side encryption](https://docs.aws.amazon.com/AmazonS3/latest/dev/UsingServerSideEncryption.html) at rest for the S3 bucket
   2. S3 bucket [versioning](https://docs.aws.amazon.com/AmazonS3/latest/dev/Versioning.html) to easily recover from both unintended user actions and application failures
   3. S3 bucket is protected from deletion if it's not empty ([force_destroy](https://www.terraform.io/docs/providers/aws/r/s3_bucket.html#force_destroy) set to `false`)
+  4. [S3 Object Lock](https://docs.aws.amazon.com/AmazonS3/latest/userguide/object-lock.html) for WORM (write-once-read-many) protection, useful for compliance requirements (e.g., PCI)
 
 # How to use this project
 usage: |-
@@ -68,6 +69,29 @@ usage: |-
     namespace = "eg"
     stage     = "prod"
     name      = "cluster"
+  }
+  ```
+
+  ### With S3 Object Lock (for compliance)
+
+  S3 Object Lock can only be enabled at bucket creation time and requires versioning (enabled by default).
+
+  ```hcl
+  module "s3_bucket" {
+    source = "cloudposse/cloudtrail-s3-bucket/aws"
+    # Cloud Posse recommends pinning every module to a specific version
+    # version     = "x.x.x"
+    namespace = "eg"
+    stage     = "prod"
+    name      = "cluster"
+
+    versioning_enabled = true
+
+    object_lock_configuration = {
+      mode  = "GOVERNANCE"
+      days  = 365
+      years = null
+    }
   }
   ```
 
