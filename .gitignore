@@ -9,3 +9,4 @@ terraform-aws-cloudtrail-s3-bucket.iml
 
 .build-harness
 build-harness
+.terraform.lock.hcl

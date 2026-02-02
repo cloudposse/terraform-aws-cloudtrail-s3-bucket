@@ -78,6 +78,7 @@ module "s3_access_log_bucket" {
   restrict_public_buckets                = var.restrict_public_buckets
   access_log_bucket_name                 = ""
   allow_ssl_requests_only                = var.allow_ssl_requests_only
+  object_lock_configuration              = var.object_lock_configuration
 
   attributes = ["access-logs"]
   context    = module.this.context
