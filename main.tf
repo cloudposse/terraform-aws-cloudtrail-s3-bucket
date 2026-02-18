@@ -78,7 +78,11 @@ module "s3_access_log_bucket" {
   restrict_public_buckets                = var.restrict_public_buckets
   access_log_bucket_name                 = ""
   allow_ssl_requests_only                = var.allow_ssl_requests_only
-  object_lock_configuration              = var.object_lock_configuration
+  
+  # S3 buckets with Object Lock can’t be used as destination buckets for server access logs.
+  # See https://docs.aws.amazon.com/AmazonS3/latest/userguide/ServerLogs.html
+  # and https://docs.aws.amazon.com/AmazonS3/latest/userguide/troubleshooting-server-access-logging.html
+  object_lock_configuration = null
 
   attributes = ["access-logs"]
   context    = module.this.context
