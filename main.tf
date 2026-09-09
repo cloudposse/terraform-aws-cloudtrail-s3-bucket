@@ -5,7 +5,7 @@ module "s3_bucket" {
   enabled = module.this.enabled
 
   acl                                    = var.acl
-  policy                                 = join("", data.aws_iam_policy_document.default.*.json)
+  source_policy_documents                = data.aws_iam_policy_document.default[*].json
   force_destroy                          = var.force_destroy
   versioning_enabled                     = var.versioning_enabled
   lifecycle_rule_enabled                 = var.lifecycle_rule_enabled
@@ -58,7 +58,7 @@ module "s3_access_log_bucket" {
 
   acl                                    = var.acl
   bucket_name                            = local.access_log_bucket_name
-  policy                                 = ""
+  source_policy_documents                = []
   force_destroy                          = var.force_destroy
   versioning_enabled                     = var.versioning_enabled
   lifecycle_rule_enabled                 = var.lifecycle_rule_enabled
