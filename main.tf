@@ -1,11 +1,11 @@
 
 module "s3_bucket" {
   source  = "cloudposse/s3-log-storage/aws"
-  version = "1.4.5"
+  version = "2.1.0"
   enabled = module.this.enabled
 
   acl                                    = var.acl
-  policy                                 = join("", data.aws_iam_policy_document.default.*.json)
+  source_policy_documents                = data.aws_iam_policy_document.default[*].json
   force_destroy                          = var.force_destroy
   versioning_enabled                     = var.versioning_enabled
   lifecycle_rule_enabled                 = var.lifecycle_rule_enabled
@@ -29,6 +29,7 @@ module "s3_bucket" {
   bucket_notifications_enabled           = var.bucket_notifications_enabled
   bucket_notifications_type              = var.bucket_notifications_type
   bucket_notifications_prefix            = var.bucket_notifications_prefix
+  object_lock_enabled                    = var.object_lock_enabled
   object_lock_configuration              = var.object_lock_configuration
 
   context = module.this.context
@@ -52,12 +53,12 @@ module "access_log_bucket_name" {
 
 module "s3_access_log_bucket" {
   source  = "cloudposse/s3-log-storage/aws"
-  version = "1.4.5"
+  version = "2.1.0"
   enabled = local.create_access_log_bucket
 
   acl                                    = var.acl
   bucket_name                            = local.access_log_bucket_name
-  policy                                 = ""
+  source_policy_documents                = []
   force_destroy                          = var.force_destroy
   versioning_enabled                     = var.versioning_enabled
   lifecycle_rule_enabled                 = var.lifecycle_rule_enabled
@@ -82,6 +83,7 @@ module "s3_access_log_bucket" {
   # S3 buckets with Object Lock can’t be used as destination buckets for server access logs.
   # See https://docs.aws.amazon.com/AmazonS3/latest/userguide/ServerLogs.html
   # and https://docs.aws.amazon.com/AmazonS3/latest/userguide/troubleshooting-server-access-logging.html
+  object_lock_enabled       = false
   object_lock_configuration = null
 
   attributes = ["access-logs"]

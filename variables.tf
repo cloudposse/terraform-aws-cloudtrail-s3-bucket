@@ -149,6 +149,12 @@ variable "bucket_notifications_prefix" {
   default     = ""
 }
 
+variable "object_lock_enabled" {
+  type        = bool
+  default     = false
+  description = "Set to `true` to enable S3 Object Lock on the CloudTrail bucket without configuring a default retention rule, so objects are only protected when a retention period or legal hold is applied per object. Object Lock is also enabled implicitly when `object_lock_configuration` is set. Never applied to the access log bucket, which cannot have Object Lock."
+}
+
 variable "object_lock_configuration" {
   type = object({
     mode  = string # Valid values are GOVERNANCE and COMPLIANCE.
